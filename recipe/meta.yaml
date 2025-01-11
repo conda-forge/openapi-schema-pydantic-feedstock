@@ -6,20 +6,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/openapi-schema-pydantic-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/openapi-schema-pydantic-{{ version }}.tar.gz
   sha256: 3e22cf58b74a69f752cc7e5f1537f6e44164282db2700cbbcd3bb99ddd065196
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - pydantic >=1.8.2
 
 test:
@@ -29,6 +29,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/kuimono/openapi-schema-pydantic
